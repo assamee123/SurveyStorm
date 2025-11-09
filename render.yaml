@@ -1,0 +1,18 @@
+# render.yaml - Render deployment configuration
+# Place this file in your GitHub repo root
+
+services:
+  - type: web
+    name: dwd-weather-dashboard
+    env: python
+    buildCommand: pip install -r requirements_prod.txt
+    startCommand: gunicorn app:server --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12
+      - key: DEFAULT_LAT
+        value: 53.55
+      - key: DEFAULT_LON
+        value: 9.99
+    autoDeploy: true
+    plan: free
